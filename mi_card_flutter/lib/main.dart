@@ -13,32 +13,30 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.teal,
         body: SafeArea(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Container(
-                  width: 100.0,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      width: 100.0,
-                      height: 100.0,
-                    ),
-                    Container(
-                      width: 100.0,
-                      height: 100.0,
-                    ),
-                  ],
-                ),
-                Container(
-                  width: 100.0,
-                ),
-              ],
+            child: Column(
+          children: <Widget>[
+            CircleAvatar(
+              backgroundImage: AssetImage('images/Robin.jpeg'),
             ),
-        ),
+            Text(
+              'Robin',
+              style: TextStyle(
+                  fontSize: 40.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Pacifico'),
+            ),
+            Text(
+              'FLUTTER DEVELOPER',
+              style: TextStyle(
+                fontFamily: 'Source Sans Pro',
+                color: Colors.teal.shade50,
+                letterSpacing: 2.5,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        )),
       ),
     );
   }
