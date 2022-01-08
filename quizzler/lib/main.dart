@@ -56,7 +56,6 @@ class _QuizPageState extends State<QuizPage> {
                   quizBrain.reset();
                   scoreKeeper = [];
                 });
-
               },
               width: 120,
             ),
