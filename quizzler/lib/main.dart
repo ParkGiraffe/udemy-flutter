@@ -43,7 +43,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.getQuestionText(questionNumber),
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -68,13 +68,13 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                if (quizBrain.getCorrectAnswer() == true) {
+                  print('right!');
+                } else {
+                  print('failed');
+                }
                 setState(() {
-                  if (quizBrain.getQuestionAnswer(questionNumber) == true) {
-                    print('right!');
-                  } else {
-                    print('failed');
-                  }
-                  questionNumber++;
+                  quizBrain.addQuestionNumber();
                 });
               },
             ),
@@ -95,13 +95,13 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                if (quizBrain.getCorrectAnswer() == false) {
+                  print('right!');
+                } else {
+                  print('failed');
+                }
                 setState(() {
-                  if (quizBrain.getQuestionAnswer(questionNumber) == false) {
-                    print('right!');
-                  } else {
-                    print('failed');
-                  }
-                  questionNumber++;
+                  quizBrain.addQuestionNumber();
                 });
               },
             ),
