@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'icon_content.dart';
+import 'reusable_card.dart';
 
 const bottomContainerHeight = 80.0;
 const activeCardColour = Color(0xFF1D1E33);
@@ -37,7 +38,7 @@ class _InputPageState extends State<InputPage> {
                     colour: activeCardColour,
                     cardChild: IconContent(
                       icon: FontAwesomeIcons.venus,
-                      label: "FEMAL",
+                      label: "FEMALE",
                     ),
                   ),
                 ),
@@ -69,6 +70,7 @@ class _InputPageState extends State<InputPage> {
             color: bottomContainerColour,
             width: double.infinity,
             height: bottomContainerHeight,
+            margin: EdgeInsets.only(top: 10.0),
           )
         ],
       ),
@@ -76,56 +78,3 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class IconContent extends StatelessWidget {
-
-  IconData icon;
-  String label;
-
-  IconContent({required this.icon, required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          icon,
-          size: 80.0,
-        ),
-        SizedBox(
-          height: 15.0,
-        ),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 18.0,
-            color: Color(0xFF8D8E98),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class ReusableCard extends StatelessWidget {
-  // const ReusableCard({
-  //   Key? key,
-  // }) : super(key: key);
-
-  Color colour;
-  Widget? cardChild;
-
-  ReusableCard({required this.colour, this.cardChild});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        color: colour,
-      ),
-      margin: EdgeInsets.all(15.0),
-      child: cardChild,
-    );
-  }
-}
