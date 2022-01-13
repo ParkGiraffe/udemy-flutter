@@ -46,10 +46,13 @@ class ResultPage extends StatelessWidget {
                     bmiResult,
                     style: kBMITextStyle,
                   ),
-                  Text(
-                    interpretation,
-                    style: kBodyTextStyle,
-                    textAlign: TextAlign.center,
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(
+                      interpretation,
+                      style: kBodyTextStyle,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ],
               ),
