@@ -7,7 +7,7 @@ class Location {
 
   Location();
 
-  void getCurrentLocation() async {
+  Future<void> getCurrentLocation() async {
     try {
       LocationPermission permission = await Geolocator.requestPermission();
       print(permission);
@@ -15,9 +15,6 @@ class Location {
           desiredAccuracy: LocationAccuracy.low);
       latitude = position.latitude;
       longitude = position.longitude;
-
-      print(longitude);
-      print(latitude);
 
     } catch (e) {
       print(e);

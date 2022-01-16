@@ -8,13 +8,18 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen> {
 
+  void getLocation() async {
+    Location location = Location();
+    await location.getCurrentLocation(); // await를 쓸려면 반환형이 Future여야 한다.
+    print(location.latitude);
+    print(location.longitude);
+  }
+
   @override
   void initState() {
     super.initState();
 
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +27,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       body: Center(
         child: TextButton(
           onPressed: () {
-            //Get the current location
-            // requestPermission();
-            Location location = Location();
-            location.getCurrentLocation();
-
+            getLocation();
           },
           child: Text('Get Location'),
         ),
