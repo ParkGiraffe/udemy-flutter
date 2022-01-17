@@ -1,9 +1,7 @@
-import 'dart:io';
-
+import 'package:clima/services/networking.dart';
 import 'package:clima/utilities/location.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -11,29 +9,21 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  double? latitude;
+  double? longitude;
 
-  void getLocation() async {
+  void getLocationData() async {
     Location location = Location();
     await location.getCurrentLocation(); // await를 쓸려면 반환형이 Future여야 한다.
-    print(location.latitude);
-    print(location.longitude);
+    
+    longitude = location.longitude;
+    latitude = location.latitude;
+
+    NetworkingHelper networkingHelper = NetworkingHelper('api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid={API key}')
+
+    var weatherData = await networkingHelper.getData();
   }
 
-  void getData() async {
-    http.Response response = await http.get('url');
-
-    if (response.statusCode == 200) {
-      String data = response.body;
-
-      var decodedData = jsonDecode(data);
-      double temperature = decodedData['main']['temp'];
-      int condition = decodedData['weather'][0]['id'];
-      String cityName = decodedData['name'];
-
-    } else {
-      print(response.statusCode);
-    }
-  }
 
   @override
   void initState() {
@@ -47,7 +37,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       body: Center(
         child: TextButton(
           onPressed: () {
-            getLocation();
+            getLocationData();
           },
           child: Text('Get Location'),
         ),
