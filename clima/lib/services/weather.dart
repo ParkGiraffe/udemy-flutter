@@ -7,6 +7,12 @@ const openWeatherMapURL = 'https://api.openweathermap.org/data/2.5/weather?';
 
 class WeatherModel {
 
+  Future getCityWeather(cityName) async {
+    NetworkHelper networkHelper = NetworkHelper('${openWeatherMapURL}q=${cityName}&appid=${apiKey}&units=metric');
+    var weatherData = await networkHelper.getData();
+    return weatherData;
+  }
+
   Future getLocationWeather() async {
     Location location = Location();
     await location.getCurrentLocation(); // await를 쓸려면 반환형이 Future여야 한다.
