@@ -29,6 +29,7 @@ class _PriceScreenState extends State<PriceScreen> {
       onChanged: (value) {
         setState(() {
           selectedCurrency = value;
+          getData(selectedCurrency);
         });
       },
     );
@@ -48,14 +49,17 @@ class _PriceScreenState extends State<PriceScreen> {
     return CupertinoPicker(
       itemExtent: 32.0,
       onSelectedItemChanged: (selectedIndex) {
-        print(selectedIndex);
+        setState(() {
+          selectedCurrency = currenciesList[selectedIndex];
+          getData(selectedCurrency);
+        });
       },
       children: pickerItems,
     );
   }
 
-  void getData() async {
-    var coinData = await CoinData().getCoinData();
+  void getData(String? quote) async {
+    var coinData = await CoinData(quote: quote).getCoinData();
     //print(coinData);
     setState(() {
       coinRate = coinData['rate'];
@@ -68,7 +72,7 @@ class _PriceScreenState extends State<PriceScreen> {
   @override
   void initState() {
     super.initState();
-    getData();
+    getData(selectedCurrency);
   }
 
 
@@ -93,7 +97,7 @@ class _PriceScreenState extends State<PriceScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
-                '1 BTC = ${coinRate.toInt()} USD',
+                '1 BTC = ${coinRate.toInt()} ${selectedCurrency}',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
