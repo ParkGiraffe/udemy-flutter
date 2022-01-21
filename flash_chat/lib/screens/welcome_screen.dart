@@ -9,7 +9,36 @@ class WelcomeScreen extends StatefulWidget {
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation animation;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1),
+    );
+
+    // animation = CurvedAnimation(parent: controller, curve: Curves.easeIn,);
+    animation = ColorTween(begin: Colors.red, end: Colors.blue).animate(controller);
+
+    controller.forward();
+
+    controller.addListener(() {
+      setState(() {});
+      print(animation.value);
+    });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
