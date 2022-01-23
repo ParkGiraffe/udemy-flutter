@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flash_chat/screens/login_screen.dart';
 import 'package:flash_chat/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +51,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Hero(
                   tag: 'logo',
@@ -58,13 +60,25 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     height: 60.0,
                   ),
                 ),
-                Text(
-                  'Flash Chat',
-                  style: TextStyle(
-                    fontSize: 45.0,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
+                AnimatedTextKit(
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                      'Flash Chat',
+                      textStyle: const TextStyle(
+                        fontSize: 40.0,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.black54,
+                        letterSpacing: 0.5
+                      ),
+                      speed: const Duration(milliseconds: 90),
+                    ),
+                  ],
+
+                  totalRepeatCount: 1,
+                  //pause: const Duration(milliseconds: 1000),
+                  //displayFullTextOnTap: true,
+                  //stopPauseOnTap: true,
+                )
               ],
             ),
             SizedBox(
