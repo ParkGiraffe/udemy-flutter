@@ -12,7 +12,6 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-
   late String email;
   late String password;
 
@@ -44,9 +43,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               onChanged: (value) {
                 email = value;
               },
-              decoration: kTextFieldDecoration.copyWith(
-                  hintText: 'Enter your email.'
-              ),
+              decoration:
+                  kTextFieldDecoration.copyWith(hintText: 'Enter your email.'),
             ),
             SizedBox(
               height: 8.0,
@@ -58,8 +56,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 password = value;
               },
               decoration: kTextFieldDecoration.copyWith(
-                  hintText: 'Enter your password.'
-              ),
+                  hintText: 'Enter your password.'),
             ),
             SizedBox(
               height: 24.0,
@@ -69,7 +66,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               onPressed: () async {
                 try {
                   final newUser = await _auth.createUserWithEmailAndPassword(
-                      email: email, password: password);
+                    email: email,
+                    password: password,
+                  );
                   if (newUser != null) {
                     Navigator.pushNamed(context, ChatScreen.id);
                   }
@@ -77,7 +76,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   print(e);
                 }
               },
-              title:'Register',
+              title: 'Register',
             ),
           ],
         ),
