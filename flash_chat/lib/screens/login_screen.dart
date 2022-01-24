@@ -1,5 +1,6 @@
 import 'package:flash_chat/components/rounded_button.dart';
 import 'package:flash_chat/constants.dart';
+import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -14,6 +15,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   late String email;
   late String password;
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
               obscureText: true,
               textAlign: TextAlign.center,
               onChanged: (value) {
+                password = value;
               },
               decoration: kTextFieldDecoration.copyWith(
                   hintText: 'Enter your password.'
@@ -62,9 +67,22 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             RoundedButton(
               color: Colors.lightBlueAccent,
-              onPressed: () {
-                //Implement login functionality.
-                Navigator.pop(context);
+              onPressed: () async {
+                try {
+                  UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                      email: email,
+                      password: password,
+                  );
+                  if (userCredential != null) {
+                    Navigator.pushNamed(context, ChatScreen.id);
+                  }
+                } on FirebaseAuthException catch (e) {
+                  if (e.code == 'user-not-found') {
+                    print('No user found for that email.');
+                  } else if (e.code == 'wrong-password') {
+                    print('Wrong password provided for that user.');
+                  }
+                }
               },
               title:'Log in',
             ),
