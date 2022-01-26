@@ -30,6 +30,29 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
+  // void getMessages_deprecated() async {
+  //   final messages = await _firestore.collection('messages').getDocument();
+  //   for (var message in messages.document) {
+  //     print(message.data);
+  //   }
+  // }
+
+  void getMessages() async {
+    final messages = await _firestore.collection('messages').get();
+    messages.docs.forEach((message) {
+      print(message.data());
+    });
+  }
+
+  // void getMessages() async {
+  //   QuerySnapshot querySnapshot = await _firestore.collection('messages').get();
+  //   final messages = querySnapshot.docs.map((doc) => doc.data()).toList();
+  //   for (var message in messages) {
+  //     print(message);
+  //   }
+  // }
+
+
   @override
   void initState() {
     super.initState();
@@ -74,10 +97,11 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      _firestore.collection('messages').add({
-                        'sender' : loggedInUser.email,
-                        'text' : messageText,
-                      });
+                      // _firestore.collection('messages').add({
+                      //   'sender' : loggedInUser.email,
+                      //   'text' : messageText,
+                      // });
+                      getMessages();
                     },
                     child: Text(
                       'Send',
