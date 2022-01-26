@@ -13,6 +13,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final messageTextController = TextEditingController();
   final _auth = FirebaseAuth.instance;
   late User loggedInUser;
   late String messageText;
@@ -47,9 +48,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-
     getCurrentUser();
-    messageStream();
   }
 
   @override
@@ -85,6 +84,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         messageText = value;
                       },
                       decoration: kMessageTextFieldDecoration,
+                      controller: messageTextController,
                     ),
                   ),
                   TextButton(
@@ -93,7 +93,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         'sender': loggedInUser.email,
                         'text': messageText,
                       });
-                      getMessages();
+                      messageTextController.clear();
                     },
                     child: Text(
                       'Send',
