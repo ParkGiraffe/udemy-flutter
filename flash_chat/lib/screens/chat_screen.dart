@@ -4,6 +4,7 @@ import 'package:flash_chat/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 final _firestore = FirebaseFirestore.instance;
+late User loggedInUser;
 
 class ChatScreen extends StatefulWidget {
   static const String id = 'chat_screen';
@@ -15,7 +16,6 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final messageTextController = TextEditingController();
   final _auth = FirebaseAuth.instance;
-  late User loggedInUser;
   late String messageText;
 
   void getCurrentUser() async {
@@ -92,6 +92,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       _firestore.collection('messages').add({
                         'sender': loggedInUser.email,
                         'text': messageText,
+                        'timeStamp' : DateTime.now(),
                       });
                       messageTextController.clear();
                     },
@@ -111,11 +112,10 @@ class _ChatScreenState extends State<ChatScreen> {
 }
 
 class MessageStream extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: _firestore.collection('messages').snapshots(),
+      stream: _firestore.collection('messages').orderBy('timeStamp').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(
@@ -124,18 +124,23 @@ class MessageStream extends StatelessWidget {
             ),
           );
         }
-        final messages = snapshot.data?.docs;
+        final messages = snapshot.data?.docs.reversed;
         List<MessageBubble> messageWidgets = [];
         for (var message in messages!) {
           final messageText = message.get('text');
           final messageSender = message.get('sender');
           final messageWidget = MessageBubble(
-              messageSender: messageSender, messageText: messageText);
+            messageSender: messageSender,
+            messageText: messageText,
+            isMe: loggedInUser.email == messageSender,
+          );
           messageWidgets.add(messageWidget);
         }
         return Expanded(
           child: ListView(
             children: messageWidgets,
+            padding: EdgeInsets.symmetric(horizontal: 10.0,),
+            reverse:  true,
           ),
         );
       },
@@ -143,19 +148,23 @@ class MessageStream extends StatelessWidget {
   }
 }
 
-
 class MessageBubble extends StatelessWidget {
-  MessageBubble({required this.messageSender, required this.messageText});
+  MessageBubble(
+      {required this.messageSender,
+      required this.messageText,
+      required this.isMe});
 
   String messageText;
   String messageSender;
+  bool isMe;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment:
+            isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Text(
             messageSender,
@@ -166,13 +175,29 @@ class MessageBubble extends StatelessWidget {
           ),
           Material(
             elevation: 1.5,
-            borderRadius: BorderRadius.circular(30.0),
-            color: Colors.lightBlueAccent,
+            borderRadius: isMe
+                ? BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    bottomLeft: Radius.circular(30.0),
+                    bottomRight: Radius.circular(30.0),
+                  )
+                : BorderRadius.only(
+                    topRight: Radius.circular(30.0),
+                    bottomLeft: Radius.circular(30.0),
+                    bottomRight: Radius.circular(30.0),
+                  ),
+            color: isMe ? Colors.lightBlueAccent : Colors.white,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              padding: EdgeInsets.symmetric(
+                vertical: 10.0,
+                horizontal: 20.0,
+              ),
               child: Text(
                 messageText,
-                style: TextStyle(color: Colors.white, fontSize: 15.0),
+                style: TextStyle(
+                  color: isMe ? Colors.white : Colors.black54,
+                  fontSize: 15.0,
+                ),
               ),
             ),
           ),
