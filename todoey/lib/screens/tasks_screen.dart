@@ -50,6 +50,7 @@ class TasksScreen extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(height: 15.0,),
           Expanded(child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
