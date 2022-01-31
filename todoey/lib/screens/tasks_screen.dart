@@ -62,7 +62,11 @@ class TasksScreen extends StatelessWidget {
                 ),
               ),
               child: ListView(
-                padding: EdgeInsets.only(top: 60.0, right: 80.0, left: 80.0),
+                padding: EdgeInsets.only(
+                  top: 60.0,
+                  right: 80.0,
+                  left: 80.0,
+                ),
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
