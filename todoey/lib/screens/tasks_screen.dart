@@ -13,7 +13,16 @@ class TasksScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.lightBlueAccent,
         onPressed: () {
-          showModalBottomSheet(context: context, builder: (context) => AddTaskScreen());
+          showModalBottomSheet(
+            context: context,
+            builder: (context) => SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: AddTaskScreen(),
+              ),
+            ),
+            isScrollControlled: true,
+          );
         },
       ),
       backgroundColor: Colors.lightBlueAccent,
@@ -74,4 +83,3 @@ class TasksScreen extends StatelessWidget {
     );
   }
 }
-
