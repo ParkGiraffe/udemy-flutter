@@ -19,6 +19,9 @@ class AddTaskScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(
+                height: 20.0,
+              ),
               Text(
                 'Add Task',
                 style: TextStyle(
@@ -51,6 +54,9 @@ class AddTaskScreen extends StatelessWidget {
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.lightBlueAccent,
                 ),
+              ),
+              SizedBox(
+                height: 20.0,
               ),
             ],
           ),
