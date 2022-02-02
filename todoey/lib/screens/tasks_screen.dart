@@ -11,7 +11,9 @@ class TasksScreen extends StatelessWidget {
           color: Colors.white,
         ),
         backgroundColor: Colors.lightBlueAccent,
-        onPressed: null,
+        onPressed: () {
+          showModalBottomSheet(context: context, builder: (context) => Container());
+        },
       ),
       backgroundColor: Colors.lightBlueAccent,
       body: Column(
