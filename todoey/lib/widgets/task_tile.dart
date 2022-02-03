@@ -31,7 +31,7 @@ class _TaskTileState extends State<TaskTile> {
 
 class TaskCheckBox extends StatelessWidget {
   final bool? checkboxState;
-  late Function(bool?)? toggleCheckboxState;
+  late final Function(bool?)? toggleCheckboxState;
 
   TaskCheckBox(
       {required this.checkboxState, required this.toggleCheckboxState});
