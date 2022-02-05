@@ -11,8 +11,6 @@ class TasksScreen extends StatefulWidget {
 class _TasksScreenState extends State<TasksScreen> {
   List<Task> tasks = [
     Task(name: 'Buy Milk'),
-    Task(name: 'Buy Gold'),
-    Task(name: 'Buy Chocolate'),
   ];
 
   @override
