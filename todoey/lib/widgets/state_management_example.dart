@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main2() {
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => Data()),
       ],
-      child: MyApp(),
+      child: MyApp2(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,7 +46,7 @@ class Level2 extends StatelessWidget {
   }
 }
 
-}
+
 
 class MyText extends StatelessWidget {
   @override
@@ -60,6 +60,7 @@ class MyTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       onChanged: (newText) => context.read<Data>().changeString(newText),
+      // onChanged: (newText) => context.read<Data>().data = newText,
     );
   }
 }
