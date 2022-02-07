@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:todoey/model/task_data.dart';
 import 'package:todoey/screens/tasks_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => TaskData()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,3 +24,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
