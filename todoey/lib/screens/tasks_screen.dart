@@ -4,14 +4,7 @@ import 'package:todoey/model/task_data.dart';
 import 'package:todoey/screens/add_task_screen.dart';
 import 'package:todoey/widgets/tasks_list.dart';
 
-class TasksScreen extends StatefulWidget {
-  @override
-  State<TasksScreen> createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-
-
+class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,12 +19,10 @@ class _TasksScreenState extends State<TasksScreen> {
             context: context,
             builder: (context) => SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: AddTaskScreen((newTaskTitle) {
-                  setState(() {
-                    // tasks.add(Task(name:newTaskTitle));
-                    context.read<TaskData>().addTask(newTaskTitle);
-                  });
+                  context.read<TaskData>().addTask(newTaskTitle);
                   Navigator.pop(context);
                 }),
               ),
