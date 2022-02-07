@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
+import 'package:todoey/model/task_data.dart';
 
 class AddTaskScreen extends StatelessWidget {
-
-  Function(String) addTaskCallback;
-  AddTaskScreen(this.addTaskCallback);
 
   String newTaskTitle = '';
 
@@ -49,7 +48,10 @@ class AddTaskScreen extends StatelessWidget {
                 height: 20.0,
               ),
               TextButton(
-                onPressed: () => addTaskCallback(newTaskTitle),
+                onPressed: () {
+                  context.read<taskData>().addTask(newTaskTitle);
+                  Navigator.pop(context);
+                },
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
