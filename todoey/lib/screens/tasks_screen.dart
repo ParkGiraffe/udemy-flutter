@@ -22,7 +22,7 @@ class TasksScreen extends StatelessWidget {
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: AddTaskScreen((newTaskTitle) {
-                  context.read<TaskData>().addTask(newTaskTitle);
+                  context.read<taskData>().addTask(newTaskTitle);
                   Navigator.pop(context);
                 }),
               ),
@@ -59,7 +59,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${context.read<TaskData>().tasks.length.toString()} Tasks',
+                  '${context.read<taskData>().tasks.length.toString()} Tasks',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
