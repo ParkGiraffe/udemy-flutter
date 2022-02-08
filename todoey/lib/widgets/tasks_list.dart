@@ -10,11 +10,12 @@ class TasksList extends StatelessWidget {
       builder: (_, taskData, __) {
         return ListView.builder(
           itemBuilder: (context, index) {
+            final task = taskData.tasks[index];
             return TaskTile(
-              isChecked: taskData.tasks[index].isDone,
-              taskTitle: taskData.tasks[index].name,
+              isChecked: task.isDone,
+              taskTitle: task.name,
               checkboxCallback: (checkboxState) {
-                taskData.tasks[index].toggleDone();
+                taskData.toggleTask(task);
               },
             );
           },
@@ -24,21 +25,3 @@ class TasksList extends StatelessWidget {
     );
   }
 }
-
-// class TasksList extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListView.builder(
-//       itemBuilder: (context, index) {
-//         return TaskTile(
-//           isChecked: context.read<TaskData>().tasks[index].isDone,
-//           taskTitle: context.read<TaskData>().tasks[index].name,
-//           checkboxCallback: (checkboxState) {
-//             // context.read<TaskData>().tasks[index].toggleDone();
-//           },
-//         );
-//       },
-//       itemCount: context.read<TaskData>().tasks.length,
-//     );
-//   }
-// }
