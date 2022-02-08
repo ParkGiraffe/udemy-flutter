@@ -17,9 +17,12 @@ class TasksList extends StatelessWidget {
               checkboxCallback: (checkboxState) {
                 taskData.toggleTask(task);
               },
+              longPressCallback: () {
+                taskData.deleteTask(task);
+              },
             );
           },
-          itemCount: taskData.getCount(),
+          itemCount: taskData.taskCount,
         );
       }
     );
