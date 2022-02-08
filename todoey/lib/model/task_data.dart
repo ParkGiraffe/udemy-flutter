@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'dart:collection';
 import 'task.dart';
 
-class taskData extends ChangeNotifier {
+class TaskData extends ChangeNotifier {
   List<Task> _tasks = [
     Task(name: 'Duel'),
     Task(name: 'Duel'),

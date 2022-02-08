@@ -49,7 +49,7 @@ class AddTaskScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  context.read<taskData>().addTask(newTaskTitle);
+                  context.read<TaskData>().addTask(newTaskTitle);
                   Navigator.pop(context);
                 },
                 child: Padding(
