@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'task.dart';
 
 class TaskData extends ChangeNotifier {
+
   List<Task> _tasks = [
     Task(name: 'Duel'),
     Task(name: 'Duel'),

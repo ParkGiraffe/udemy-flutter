@@ -7,4 +7,11 @@ class Task {
   void toggleDone() {
     isDone = !isDone;
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'isDone': isDone,
+    };
+  }
 }
