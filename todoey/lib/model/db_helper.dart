@@ -82,7 +82,7 @@ class DBHelper {
       mainTableName,
       // 특정 Task를 제거하기 위해 'where'절을 사용.
       where: 'name = ?',
-      whereArgs: [name];
+      whereArgs: [name],
     );
   }
 }
