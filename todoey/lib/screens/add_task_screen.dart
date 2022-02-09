@@ -3,7 +3,6 @@ import 'package:provider/src/provider.dart';
 import 'package:todoey/model/task_data.dart';
 
 class AddTaskScreen extends StatelessWidget {
-
   String newTaskTitle = '';
 
   @override
